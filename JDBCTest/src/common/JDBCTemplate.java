@@ -31,6 +31,9 @@ public class JDBCTemplate {
 		try {
 			//2.DB연결
 			con = DriverManager.getConnection(url,username,password);
+			
+			//자동커밋 설정
+			con.setAutoCommit(false);
 		} catch (SQLException e) {
 			System.out.println("[Error]DB연결 실패");
 			e.printStackTrace();
@@ -62,4 +65,31 @@ public class JDBCTemplate {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	//commit, rollback
+	public static void Commit(Connection con) {
+		try {
+			con.commit();
+		}catch(SQLException e) {
+			System.out.println("[Error]commit 실패");
+			e.printStackTrace();
+		}
+	}
+	public static void Rollback(Connection con) {
+		try {
+			con.rollback();
+		} catch (SQLException e) {
+			System.out.println("[Error]rollback 실패");
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
