@@ -24,26 +24,59 @@ public class ScoreServiceImpl implements ScoreService{
 
 	@Override
 	public Score getOne(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con = getConnection();
+		Score res = dao.getOne(con, name);
+		Close(con);
+		
+		return res;
 	}
 
 	@Override
 	public int insert(Score s) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = getConnection();
+		
+		int res = dao.insert(con, s);
+		
+		if(res>0) {
+			Commit(con);
+		}else {
+			Rollback(con);
+		}
+		
+		Close(con);
+		
+		return res;
 	}
 
 	@Override
 	public int update(Score s) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = getConnection();
+		
+		int res = dao.update(con, s);
+		
+		if(res>0) {
+			Commit(con);
+		}else {
+			Rollback(con);
+		}
+		
+		Close(con);
+		
+		return res;
 	}
 
 	@Override
 	public int delete(String name) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = getConnection();
+		
+		int res = dao.delete(con, name);
+		
+		if(res>0) {
+			Commit(con);
+		}
+		Close(con);
+		
+		return res;
 	}
 
 }

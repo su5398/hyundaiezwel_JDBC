@@ -48,6 +48,12 @@ public class ScoreView {
 				}
 				break;
 			case 2:
+				//선택출력
+				System.out.print("선택할 이름: ");
+				name = sc.next();
+				Score one = biz.getOne(name);
+				System.out.println(one);
+				break;
 			case 3:
 				//추가
 				System.out.print("추가할 이름: ");
@@ -64,10 +70,58 @@ public class ScoreView {
 				s.scoreAvg();
 				s.scoreGrade();
 				
-				System.out.println(s);
-				
+				res = biz.insert(s);
+				if(res>0) {
+					System.out.println("추가 성공");
+				}else {
+					System.out.println("추가 실패");
+				}
+				break;
 			case 4:
+				//수정
+				System.out.print("수정할 이름: ");
+				name=sc.next();
+				
+				Score check = biz.getOne(name);
+				if(check != null) {
+					System.out.print("이전 국어 점수: "+check.getKor()+" - 바꿀 국어 점수: ");
+					kor = sc.nextInt();
+					System.out.print("이전 영어 점수: "+check.getEng()+" - 바꿀 영어 점수: ");
+					eng = sc.nextInt();
+					System.out.print("이전 수학 점수: "+check.getMath()+" - 바꿀 수학 점수: ");
+					math = sc.nextInt();
+					
+					Score up = new Score(name, kor, eng, math);
+					up.scoreSum();
+					up.scoreAvg();
+					up.scoreGrade();
+					
+					res = biz.update(up);
+					
+					if(res>0) {
+						System.out.println(name+" 수정 성공");
+					}else {
+						System.out.println("수정 실패");
+					}
+					break;
+					
+					
+				}else {
+					System.out.println("해당 이름이 없습니다.");
+				}
+				break;
 			case 5:
+				//삭제
+				System.out.println("삭제할 이름: ");
+				name = sc.next();
+				
+				res = biz.delete(name);
+				if(res>0) {
+					System.out.print(name+ " 삭제 성공");
+				}else {
+					System.out.print("삭제 실패");
+				}
+				break;
 			case 6:
 				//종료
 				System.out.println("종료되었습니다.");

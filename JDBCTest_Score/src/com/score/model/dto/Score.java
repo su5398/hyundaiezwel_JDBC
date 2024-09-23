@@ -115,6 +115,7 @@ public class Score {
 			break;
 		case 6:
 			this.grade="D";
+			break;
 		default:
 			this.grade="F";
 		}

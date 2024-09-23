@@ -8,10 +8,10 @@ import com.score.model.dto.Score;
 public interface ScoreDao {
 	
 	String getAllSql = " SELECT * FROM SCORE ";
-	String getOneSql = " SELECT * FRMO SCORE WHERE NAME=? ";
-	String insertSql = "";
-	String updateSql = "";
-	String deleteSql = "";
+	String getOneSql = " SELECT * FROM SCORE WHERE NAME=? ";
+	String insertSql = " INSERT INTO SCORE VALUES(?,?,?,?,?,?,?)";
+	String updateSql = " UPDATE SCORE SET KOR=?,ENG=?,MATH=?,SUM=?,AVG=?,GRADE=? WHERE NAME=? ";
+	String deleteSql = " DELETE FROM SCORE WHERE NAME=? ";
 	 
 	public List<Score> getAll(Connection con);
 	public Score getOne(Connection con, String name);
